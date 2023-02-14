@@ -1,4 +1,4 @@
-WEATHER API APP and
+WEATHER API APP
 
 # Getting Started with Create React App
 
