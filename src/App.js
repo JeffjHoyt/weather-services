@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import DayCard from "./components/DayCard/DayCard";
+import { Container, Row, Col } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <DayCard />
+        </Col>
+      </Row>
+      <script
+        src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js"
+        crossOrigin="anonymous"
+      ></script>
+
+      <script
+        src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"
+        crossOrigin="anonymous"
+      ></script>
+
+      <script
+        src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"
+        crossOrigin="anonymous"
+      ></script>
+    </Container>
   );
 }
 
