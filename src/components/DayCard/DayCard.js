@@ -1,38 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DayCard.css";
 import {
   Container,
   Row,
   Col,
   Card,
-  CardImg,
-  CardText,
   CardBody,
   CardTitle,
   CardSubtitle,
-  Button,
 } from "reactstrap";
+import axios from "axios";
 
-const DayCard = (props) => {
+function DayCard(props) {
   return (
     <Container>
       <Row>
         <Col>
-          <Card styleName={{ width: "330px" }}>
+          <Card style={{ width: "330px" }}>
             <CardBody>
-              <CardTitle>Mon 4th</CardTitle>
+              <CardTitle>Today in {props.city}</CardTitle>
               <div className="weatherIcon"></div>
-              <CardSubtitle>78 / 54</CardSubtitle>
+              <CardSubtitle>
+                {props.high} / {props.low}
+              </CardSubtitle>
               <Row>
                 <Col className="d-flex">
                   <div className="windImage"></div>
-                  <div className="wind">14mph</div>
+                  <div className="wind">{props.windSpeed}</div>
                 </Col>
               </Row>
               <Row>
                 <Col className="d-flex">
                   <div className="humidityImage"></div>
-                  <div className="humidity">5%</div>
+                  <div className="humidity">{props.humidity}</div>
                 </Col>
               </Row>
             </CardBody>
@@ -41,6 +41,6 @@ const DayCard = (props) => {
       </Row>
     </Container>
   );
-};
+}
 
 export default DayCard;
