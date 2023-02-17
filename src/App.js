@@ -5,6 +5,8 @@ import { Container, Row, Col, Form } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import ForecastCard from "./components/ForecastCard/ForecastCard";
 
 function App() {
   const [zipCode, setZipCode] = useState("");
@@ -58,6 +60,29 @@ function App() {
     fetchCoordinates();
   }, [zipCode]);
 
+  let forecastDisplay = () => {
+    forecastData.list.map((forecast, index) => {
+      if (index % 8 === 0) {
+        const date = new Date(forecast.dt * 1000);
+        const dayOfWeek = date.toLocaleString("en-US", {
+          weekday: "long",
+        });
+        return (
+          <ForecastCard
+            id={forecast.dt}
+            day={dayOfWeek}
+            key={forecast.dt}
+            high={forecast.main.temp_max}
+            humidity={forecast.main.humidity}
+            windSpeed={forecast.wind.speed}
+          />
+        );
+      } else {
+        return null;
+      }
+    });
+  };
+
   return (
     <div>
       <h1>Weather App</h1>
@@ -72,18 +97,23 @@ function App() {
       </form>
       {error && <p>{error}</p>}
       {weatherData && (
-        <div>
-          <h2>Current Weather</h2>
-          <p>{weatherData.name}</p>
-          <p>{weatherData.weather[0].main}</p>
-          <p>{weatherData.main.temp}&deg;F</p>
-          <p>{weatherData.main.humidity}% humidity</p>
-          <p>{weatherData.wind.speed} mph wind speed</p>
-        </div>
+        <DayCard
+          weatherIcon={weatherData.weather[0].icon}
+          city={weatherData.name}
+          high={weatherData.main.temp_max}
+          low={weatherData.main.temp_min}
+          windSpeed={weatherData.wind.speed}
+          humidity={weatherData.main.humidity}
+        />
       )}
+      <div>
+        <h2>5-Day Forecast</h2>
+      </div>
       {forecastData && (
-        <div>
-          <h2>5-Day Forecast</h2>
+        <div
+          className="text-center align-content-center"
+          style={{ marginLeft: "5%" }}
+        >
           {forecastData.list.map((forecast, index) => {
             if (index % 8 === 0) {
               const date = new Date(forecast.dt * 1000);
@@ -91,13 +121,18 @@ function App() {
                 weekday: "long",
               });
               return (
-                <div key={forecast.dt}>
-                  <h3>{dayOfWeek}</h3>
-                  <p>{forecast.weather[0].main}</p>
-                  <p>{forecast.main.temp}&deg;F</p>
-                  <p>{forecast.main.humidity}% humidity</p>
-                  <p>{forecast.wind.speed} mph wind speed</p>
-                </div>
+                <Row>
+                  <Col className="d-flex">
+                    <ForecastCard
+                      id={forecast.dt}
+                      day={dayOfWeek}
+                      key={forecast.dt}
+                      high={forecast.main.temp_max}
+                      humidity={forecast.main.humidity}
+                      windSpeed={forecast.wind.speed}
+                    />
+                  </Col>
+                </Row>
               );
             } else {
               return null;
