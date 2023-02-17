@@ -84,7 +84,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="justify-content-center text-center">
       <h1>Weather App</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -95,24 +95,26 @@ function App() {
           {loading ? "Loading..." : "Get Weather"}
         </button>
       </form>
-      {error && <p>{error}</p>}
-      {weatherData && (
-        <DayCard
-          weatherIcon={weatherData.weather[0].icon}
-          city={weatherData.name}
-          high={weatherData.main.temp_max}
-          low={weatherData.main.temp_min}
-          windSpeed={weatherData.wind.speed}
-          humidity={weatherData.main.humidity}
-        />
-      )}
+      <div className="align-content-center">
+        {error && <p>{error}</p>}
+        {weatherData && (
+          <DayCard
+            weatherIcon={weatherData.weather[0].icon}
+            city={weatherData.name}
+            high={weatherData.main.temp_max}
+            low={weatherData.main.temp_min}
+            windSpeed={weatherData.wind.speed}
+            humidity={weatherData.main.humidity}
+          />
+        )}
+      </div>
       <div>
         <h2>5-Day Forecast</h2>
       </div>
       {forecastData && (
         <div
-          className="text-center align-content-center"
-          style={{ marginLeft: "5%" }}
+          className="text-center justify-content-center d-flex flex-wrap"
+          style={{ marginLeft: "2%", marginRight: "2%", gap: "5px" }}
         >
           {forecastData.list.map((forecast, index) => {
             if (index % 8 === 0) {
@@ -121,18 +123,14 @@ function App() {
                 weekday: "long",
               });
               return (
-                <Row>
-                  <Col className="d-flex">
-                    <ForecastCard
-                      id={forecast.dt}
-                      day={dayOfWeek}
-                      key={forecast.dt}
-                      high={forecast.main.temp_max}
-                      humidity={forecast.main.humidity}
-                      windSpeed={forecast.wind.speed}
-                    />
-                  </Col>
-                </Row>
+                <ForecastCard
+                  id={forecast.dt}
+                  day={dayOfWeek}
+                  key={forecast.dt}
+                  high={forecast.main.temp_max}
+                  humidity={forecast.main.humidity}
+                  windSpeed={forecast.wind.speed}
+                />
               );
             } else {
               return null;
