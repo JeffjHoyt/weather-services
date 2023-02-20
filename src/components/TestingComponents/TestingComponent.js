@@ -7,7 +7,6 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import ForecastCard from "./components/ForecastCard/ForecastCard";
-import axios from "axios";
 
 function App() {
   const [zipCode, setZipCode] = useState("");
@@ -26,11 +25,6 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(null);
-    if (zipCode.length !== 5 || !/^\d+$/.test(zipCode)) {
-      alert("Please enter a valid 5-digit zip code.");
-      return;
-    }
     // Show the loading screen
     setIsLoading(true);
 
@@ -46,24 +40,20 @@ function App() {
     setLoading(true);
     setSearched(true);
 
-    // Show the loading screen
-    setIsLoading(true);
-
     try {
-      const [weatherResponse, forecastResponse] = await Promise.all([
-        axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=29078a91d8b4e8f94262c91a3d966467&units=imperial`
-        ),
-        axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&appid=29078a91d8b4e8f94262c91a3d966467&units=imperial`
-        ),
-      ]);
+      const weatherResponse = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=29078a91d8b4e8f94262c91a3d966467&units=imperial`
+      );
+      const weatherData = await weatherResponse.json();
+      setWeatherData(weatherData);
 
-      setWeatherData(weatherResponse.data);
-      setForecastData(forecastResponse.data);
+      const forecastResponse = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&appid=29078a91d8b4e8f94262c91a3d966467&units=imperial`
+      );
+      const forecastData = await forecastResponse.json();
+      setForecastData(forecastData);
+
       setLoading(false);
-      setVisible("visible");
-      setSearched(true);
     } catch (error) {
       console.error(error);
       setError(error.message);
@@ -74,10 +64,11 @@ function App() {
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
-        const response = await axios.get(
+        const response = await fetch(
           `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},us&appid=29078a91d8b4e8f94262c91a3d966467`
         );
-        setMapPosition([response.data.lat, response.data.lon]);
+        const data = await response.json();
+        setMapPosition([data.lat, data.lon]);
       } catch (error) {
         console.error(error);
       }
@@ -127,7 +118,6 @@ function App() {
           {loading ? "Loading..." : "Get Weather"}
         </button>
       </form>
-      {error && <div className="text-danger">Please enter valid zip code</div>}
       {/* Show the loading screen if isLoading is true */}
       {isLoading && (
         <div className="loading-screen">
@@ -137,68 +127,6 @@ function App() {
           />
         </div>
       )}
-      {weatherData ? (
-        <div>
-          <div id="appDaycard">
-            <div
-              id="dayCard"
-              className="justify-content-center mx-auto"
-              style={{ visibility: `${visible}` }}
-            >
-              {weatherData && (
-                <DayCard
-                  weatherIcon={weatherData.weather[0].icon}
-                  city={weatherData.name}
-                  high={weatherData.main.temp_max}
-                  low={weatherData.main.temp_min}
-                  windSpeed={weatherData.wind.speed}
-                  humidity={weatherData.main.humidity}
-                />
-              )}
-            </div>
-          </div>
-
-          {searched ? (
-            <div>
-              <h2>5-Day Forecast</h2>
-            </div>
-          ) : null}
-
-          {forecastData && (
-            <div
-              className="text-center justify-content-center d-flex flex-wrap"
-              id="forecastCard"
-              style={{
-                marginLeft: "2%",
-                marginRight: "2%",
-                gap: "5px",
-                visibility: { visible },
-              }}
-            >
-              {forecastData.list.map((forecast, index) => {
-                if (index % 8 === 0) {
-                  const date = new Date(forecast.dt * 1000);
-                  const dayOfWeek = date.toLocaleString("en-US", {
-                    weekday: "long",
-                  });
-                  return (
-                    <ForecastCard
-                      id={forecast.dt}
-                      day={dayOfWeek}
-                      key={forecast.dt}
-                      high={forecast.main.temp_max}
-                      humidity={forecast.main.humidity}
-                      windSpeed={forecast.wind.speed}
-                    />
-                  );
-                } else {
-                  return null;
-                }
-              })}
-            </div>
-          )}
-        </div>
-      ) : null}
     </div>
   );
 }

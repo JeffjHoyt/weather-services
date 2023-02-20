@@ -26,23 +26,25 @@ function ForecastCard(props) {
   //     } else props.class === "drizzle";
   //   }
   return (
-    <Card style={{ minWidth: "330px", width: "40%" }}>
+    <Card style={{ width: "330px" }}>
       <CardBody>
-        <CardTitle>{props.day}</CardTitle>
+        <CardTitle>
+          <h3>{props.day}</h3>
+        </CardTitle>
         <div id="classSelector" className="weatherIcon"></div>
-        <CardSubtitle>
-          {props.high} / {props.low}
+        <CardSubtitle style={{ fontWeight: "bold" }}>
+          <h3>{props.high}°</h3>
         </CardSubtitle>
         <Row>
-          <Col className="d-flex">
+          <Col className="d-flex justify-content-end">
             <div className="windImage"></div>
-            <div className="wind">{props.windSpeed}</div>
+            <div className="wind">{props.windSpeed}mph winds</div>
           </Col>
         </Row>
         <Row>
-          <Col className="d-flex">
+          <Col className="d-flex justify-content-end">
             <div className="humidityImage"></div>
-            <div className="humidity">{props.humidity}</div>
+            <div className="humidity">{props.humidity}% humidity</div>
           </Col>
         </Row>
       </CardBody>
