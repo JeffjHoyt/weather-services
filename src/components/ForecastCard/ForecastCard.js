@@ -26,7 +26,7 @@ function ForecastCard(props) {
   //     } else props.class === "drizzle";
   //   }
   return (
-    <Card style={{ width: "330px" }}>
+    <Card style={{ width: "330px", opacity: "0.73" }}>
       <CardBody>
         <CardTitle>
           <h3>{props.day}</h3>
