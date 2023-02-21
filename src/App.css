@@ -5,6 +5,14 @@
   padding-right: 0;
 }
 
+.container {
+  --bs-gutter-x: 0;
+  padding-right: calc(var(--bs-gutter-x) * 0) !important;
+  padding-left: calc(var(--bs-gutter-x) * 0) !important;
+  margin-right: 0 !important;
+  max-width: 100% !important;
+}
+
 #appDaycard {
   display: flex;
   justify-content: center;
@@ -57,9 +65,9 @@ input[type="search"]:focus {
 #backgroundContainer {
   background-image: url("https://i.pinimg.com/736x/ab/11/77/ab11777c199296b1e63f36cb2d6dde85.jpg");
   background-repeat: no-repeat;
-  background-size: stretch;
-  width: auto;
-  height: 100vh;
+  background-size: cover;
+  height: 1000px;
+
   /* margin-left: 0 !important;
   margin-right: 0 !important; */
 }

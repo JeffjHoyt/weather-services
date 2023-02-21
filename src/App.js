@@ -94,14 +94,20 @@ function App() {
           weekday: "long",
         });
         return (
-          <ForecastCard
-            id={forecast.dt}
-            day={dayOfWeek}
-            key={forecast.dt}
-            high={forecast.main.temp_max}
-            humidity={forecast.main.humidity}
-            windSpeed={forecast.wind.speed}
-          />
+          <Container>
+            <Row>
+              <Col>
+                <ForecastCard
+                  id={forecast.dt}
+                  day={dayOfWeek}
+                  key={forecast.dt}
+                  high={forecast.main.temp_max}
+                  humidity={forecast.main.humidity}
+                  windSpeed={forecast.wind.speed}
+                />
+              </Col>
+            </Row>
+          </Container>
         );
       } else {
         return null;
@@ -113,10 +119,16 @@ function App() {
     <Container
       id="backgroundContainer"
       className="justify-content-center text-center"
+      style={{
+        marginRight: "0px",
+        marginLeft: "0px",
+        height: "1500px",
+        width: "100vw",
+      }}
     >
       <Row>
         <Col>
-          <h1>Weather App</h1>
+          <h1 style={{ color: "white" }}>Weather App</h1>
         </Col>
       </Row>
       <Row>
@@ -144,6 +156,7 @@ function App() {
                 backgroundColor: "#00BFFF",
                 color: "#000",
                 marginBottom: "10px",
+                border: "1px solid white",
               }}
             >
               {loading ? "Loading..." : "Get Weather"}
@@ -199,7 +212,7 @@ function App() {
 
               {searched ? (
                 <div>
-                  <h2>5-Day Forecast</h2>
+                  <h2 style={{ color: "white" }}>5-Day Forecast</h2>
                 </div>
               ) : null}
 

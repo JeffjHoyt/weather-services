@@ -15,7 +15,7 @@ function DayCard(props) {
   return (
     <Card
       id="dayCard"
-      className="dayCard shadow-sm p-3 mb-5 bg-white rounded"
+      className="dayCard shadow-sm p-3 mb-5 bg-white rounded text-center"
       key={props.key}
       style={{ width: "330px", marginBottom: "20px", padding: "0px" }}
     >
@@ -33,9 +33,9 @@ function DayCard(props) {
           <div className={props.background}></div>
           <br></br>
           <br></br>
-          <CardSubtitle className="d-flex">
-            <h3 style={{ fontWeight: "bold" }}>{props.high}° </h3>
-            <h3>/ {props.low}°</h3>
+          <CardSubtitle className="d-flex text-center">
+            <h3 style={{ fontWeight: "bold", color: "red" }}>{props.high}°</h3>
+            <h3 style={{ color: "blue" }}>/ {props.low}°</h3>
           </CardSubtitle>
         </div>
         <Row>
