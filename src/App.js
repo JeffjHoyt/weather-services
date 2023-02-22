@@ -104,6 +104,7 @@ function App() {
                   high={forecast.main.temp_max}
                   humidity={forecast.main.humidity}
                   windSpeed={forecast.wind.speed}
+                  icon={forecast.weather[0].icon}
                 />
               </Col>
             </Row>
@@ -123,7 +124,8 @@ function App() {
         marginRight: "0px",
         marginLeft: "0px",
         height: "1500px",
-        width: "100vw",
+        width: "100vw !important",
+        minWidth: "375px !important",
       }}
     >
       <Row>
@@ -137,7 +139,7 @@ function App() {
             <label>
               <input
                 style={{ border: "none", borderRadius: "50px" }}
-                className="shadow-lg p-2  "
+                className="shadow-lg p-2 hoverEffect "
                 placeholder="Enter your zip code:"
                 type="text"
                 value={zipCode}
@@ -148,6 +150,7 @@ function App() {
 
             <Button
               type="submit"
+              className="hoverEffect"
               disabled={loading}
               style={{
                 marginTop: "10px",
@@ -205,6 +208,7 @@ function App() {
                       windSpeed={weatherData.wind.speed}
                       humidity={weatherData.main.humidity}
                       background={weatherData.main}
+                      icon={weatherData.weather[0].icon}
                     />
                   )}
                 </div>

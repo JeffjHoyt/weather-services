@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 
 function ForecastCard(props) {
+  const OW_API_ICON_URL = "http://openweathermap.org/img/wn/";
   const classSelector = document.getElementById("classSelector");
   //   {
   //     if (props.class === "Clear") {
@@ -31,7 +32,9 @@ function ForecastCard(props) {
         <CardTitle>
           <h3>{props.day}</h3>
         </CardTitle>
-        <div id="classSelector" className="weatherIcon"></div>
+        {/* <div className="">
+          <img src={`${OW_API_ICON_URL}${props.icon}.png`} alt="weather icon" />
+        </div>{" "} */}
         <CardSubtitle style={{ fontWeight: "bold" }}>
           <h3>{props.high}°</h3>
         </CardSubtitle>

@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 
 function DayCard(props) {
+  const OW_API_ICON_URL = "http://openweathermap.org/img/wn/";
   return (
     <Card
       id="dayCard"
@@ -29,14 +30,18 @@ function DayCard(props) {
         </CardTitle>
         <br></br>
 
-        <div className="d-flex justify-content-evenly">
-          <div className={props.background}></div>
-          <br></br>
-          <br></br>
-          <CardSubtitle className="d-flex text-center">
+        <div className=" justify-content-evenly">
+          <CardSubtitle className="d-flex text-center align-content-center justify-content-center">
             <h3 style={{ fontWeight: "bold", color: "red" }}>{props.high}°</h3>
-            <h3 style={{ color: "blue" }}>/ {props.low}°</h3>
+            <h3 style={{ color: "blue" }}>/{props.low}°</h3>
           </CardSubtitle>
+          <div className="">
+            <img
+              style={{ width: "120px", height: "auto" }}
+              src={`${OW_API_ICON_URL}${props.icon}.png`}
+              alt="weather icon"
+            />
+          </div>{" "}
         </div>
         <Row>
           <Col className="d-flex justify-content-end">
