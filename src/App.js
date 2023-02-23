@@ -87,8 +87,20 @@ function App() {
   }, [zipCode]);
 
   let forecastDisplay = () => {
-    forecastData.list.map((forecast, index) => {
-      if (index % 8 === 0) {
+    const today = new Date();
+    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+    const fiveDaysLater = new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000);
+
+    const nextFiveDays = forecastData.list
+      .filter((forecast) => {
+        const date = new Date(forecast.dt * 1000);
+        return (
+          date >= tomorrow &&
+          date < fiveDaysLater &&
+          forecast.dt_txt.includes("12:00:00")
+        );
+      })
+      .map((forecast) => {
         const date = new Date(forecast.dt * 1000);
         const dayOfWeek = date.toLocaleString("en-US", {
           weekday: "long",
@@ -110,10 +122,9 @@ function App() {
             </Row>
           </Container>
         );
-      } else {
-        return null;
-      }
-    });
+      });
+
+    return nextFiveDays;
   };
 
   return (
@@ -130,7 +141,9 @@ function App() {
     >
       <Row>
         <Col>
-          <h1 style={{ color: "white" }}>Weather App</h1>
+          <h1 style={{ color: "white" }}></h1>
+          <br></br>
+          <br></br>
         </Col>
       </Row>
       <Row>
@@ -138,7 +151,7 @@ function App() {
           <form onSubmit={handleSubmit}>
             <label>
               <input
-                style={{ border: "none", borderRadius: "50px" }}
+                style={{ border: "none", borderRadius: "50px", width: "370px" }}
                 className="shadow-lg p-2 hoverEffect "
                 placeholder="Enter your zip code:"
                 type="text"
@@ -209,6 +222,7 @@ function App() {
                       humidity={weatherData.main.humidity}
                       background={weatherData.main}
                       icon={weatherData.weather[0].icon}
+                      day={weatherData.weather[0].main}
                     />
                   )}
                 </div>

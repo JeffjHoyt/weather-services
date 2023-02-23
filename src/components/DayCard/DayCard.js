@@ -33,7 +33,7 @@ function DayCard(props) {
         <div className=" justify-content-evenly">
           <CardSubtitle className="d-flex text-center align-content-center justify-content-center">
             <h3 style={{ fontWeight: "bold", color: "red" }}>
-              high: {props.high}°{" "}
+              high: {props.high}°
             </h3>
           </CardSubtitle>
           <CardSubtitle className="d-flex text-center align-content-center justify-content-center">
@@ -45,6 +45,8 @@ function DayCard(props) {
               src={`${OW_API_ICON_URL}${props.icon}.png`}
               alt="weather icon"
             />
+            <h3>{props.day}</h3>
+            <br></br>
           </div>{" "}
         </div>
         <Row>
