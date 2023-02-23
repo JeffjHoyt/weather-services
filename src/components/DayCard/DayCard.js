@@ -32,8 +32,12 @@ function DayCard(props) {
 
         <div className=" justify-content-evenly">
           <CardSubtitle className="d-flex text-center align-content-center justify-content-center">
-            <h3 style={{ fontWeight: "bold", color: "red" }}>{props.high}°</h3>
-            <h3 style={{ color: "blue" }}>/{props.low}°</h3>
+            <h3 style={{ fontWeight: "bold", color: "red" }}>
+              high: {props.high}°{" "}
+            </h3>
+          </CardSubtitle>
+          <CardSubtitle className="d-flex text-center align-content-center justify-content-center">
+            <h3 style={{ color: "blue" }}> low: {props.low}°</h3>
           </CardSubtitle>
           <div className="">
             <img
