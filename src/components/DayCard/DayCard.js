@@ -29,7 +29,7 @@ function DayCard(props) {
           </h2>
         </CardTitle>
         <br></br>
-
+<br></br>
         <div className=" justify-content-evenly">
           <CardSubtitle className="d-flex text-center align-content-center justify-content-center">
             <h3 style={{ fontWeight: "bold", color: "red" }}>

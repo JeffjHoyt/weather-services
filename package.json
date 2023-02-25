@@ -1,6 +1,6 @@
 {
-  "homepage": "https://jeffjhoyt.github.io/weather-services",
   "name": "weather-services",
+  "homepage": "https://jeffjhoyt.github.io/weather-services",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

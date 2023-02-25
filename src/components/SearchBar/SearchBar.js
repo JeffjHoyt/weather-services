@@ -3,7 +3,6 @@ import { Container, Row, Col, Form, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./SearchBar.css";
 import axios from "axios";
-import DayCard from "../DayCard/DayCard";
 
 function SearchBar() {
   const [zipCode, setZipCode] = useState("");
