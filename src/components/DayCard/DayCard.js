@@ -23,13 +23,13 @@ function DayCard(props) {
       <CardBody style={{ height: "100%", width: "100%" }}>
         <CardTitle style={{ top: "0", position: "absolute" }}>
           <h2>
-            <span style={{ fontWeight: "bold" }}>Today </span>
-            <span>in </span>
+            <span style={{ fontWeight: "bold" }}> </span>
+            <span></span>
             {props.city}
           </h2>
         </CardTitle>
         <br></br>
-<br></br>
+        <br></br>
         <div className=" justify-content-evenly">
           <CardSubtitle className="d-flex text-center align-content-center justify-content-center">
             <h3 style={{ fontWeight: "bold", color: "red" }}>

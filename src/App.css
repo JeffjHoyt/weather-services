@@ -1,4 +1,5 @@
 * {
+  font-family: "Montserrat", sans-serif;
   margin-right: 0;
   margin-left: 0;
   padding-left: 0;
@@ -69,12 +70,9 @@ input[type="search"]:focus {
 }
 
 #backgroundContainer {
-  background-image: url("https://i.pinimg.com/736x/ab/11/77/ab11777c199296b1e63f36cb2d6dde85.jpg");
+  background-image: url("https://i.imgur.com/Op9UR6d.png");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 1000px;
-  width: 100vw !important;
-  min-width: 375px !important;
 
   /* margin-left: 0 !important;
   margin-right: 0 !important; */

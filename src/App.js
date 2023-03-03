@@ -8,6 +8,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import ForecastCard from "./components/ForecastCard/ForecastCard";
 import axios from "axios";
+import BottomBar from "./components/BottomBar/BottomBar";
 
 function App() {
   const [zipCode, setZipCode] = useState("");
@@ -86,46 +87,46 @@ function App() {
     fetchCoordinates();
   }, [zipCode]);
 
-  let forecastDisplay = () => {
-    const today = new Date();
-    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
-    const fiveDaysLater = new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000);
+  // let forecastDisplay = () => {
+  //   const today = new Date();
+  //   const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+  //   const fiveDaysLater = new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000);
 
-    const nextFiveDays = forecastData.list
-      .filter((forecast) => {
-        const date = new Date(forecast.dt * 1000);
-        return (
-          date >= tomorrow &&
-          date < fiveDaysLater &&
-          forecast.dt_txt.includes("12:00:00")
-        );
-      })
-      .map((forecast) => {
-        const date = new Date(forecast.dt * 1000);
-        const dayOfWeek = date.toLocaleString("en-US", {
-          weekday: "long",
-        });
-        return (
-          <Container>
-            <Row>
-              <Col>
-                <ForecastCard
-                  id={forecast.dt}
-                  day={dayOfWeek}
-                  key={forecast.dt}
-                  high={forecast.main.temp_max}
-                  humidity={forecast.main.humidity}
-                  windSpeed={forecast.wind.speed}
-                  icon={forecast.weather[0].icon}
-                />
-              </Col>
-            </Row>
-          </Container>
-        );
-      });
+  // const nextFiveDays = forecastData.list
+  //   .filter((forecast) => {
+  //     const date = new Date(forecast.dt * 1000);
+  //     return (
+  //       date >= tomorrow &&
+  //       date < fiveDaysLater &&
+  //       forecast.dt_txt.includes("12:00:00")
+  //     );
+  //   })
+  //   .map((forecast) => {
+  //     const date = new Date(forecast.dt * 1000);
+  //     const dayOfWeek = date.toLocaleString("en-US", {
+  //       weekday: "long",
+  //     });
+  //     return (
+  //       <Container>
+  //         <Row>
+  //           <Col>
+  //             <ForecastCard
+  //               id={forecast.dt}
+  //               day={dayOfWeek}
+  //               key={forecast.dt}
+  //               high={forecast.main.temp_max}
+  //               humidity={forecast.main.humidity}
+  //               windSpeed={forecast.wind.speed}
+  //               icon={forecast.weather[0].icon}
+  //             />
+  //           </Col>
+  //         </Row>
+  //       </Container>
+  //     );
+  //   });
 
-    return nextFiveDays;
-  };
+  // return nextFiveDays;
+  // };
 
   return (
     <Container
@@ -134,9 +135,10 @@ function App() {
       style={{
         marginRight: "0px",
         marginLeft: "0px",
-        height: "1500px",
         width: "100vw !important",
+        height: "100vh",
         minWidth: "375px !important",
+        overflowX: "hidden",
       }}
     >
       <Row>
@@ -215,7 +217,6 @@ function App() {
                   {weatherData && (
                     <DayCard
                       weatherIcon={weatherData.weather[0].icon}
-                      city={weatherData.name}
                       high={weatherData.main.temp_max}
                       low={weatherData.main.temp_min}
                       windSpeed={weatherData.wind.speed}
@@ -230,11 +231,19 @@ function App() {
 
               {searched ? (
                 <div>
-                  <h2 style={{ color: "white" }}>5-Day Forecast</h2>
+                  <Row>
+                    <Col style={{ position: "fixed", bottom: "0" }}>
+                      <BottomBar
+                        feelsLike={weatherData.main.feels_like}
+                        high={weatherData.main.temp_max}
+                        low={weatherData.main.temp_min}
+                      />
+                    </Col>
+                  </Row>{" "}
                 </div>
               ) : null}
 
-              {forecastData && (
+              {/* {forecastData && (
                 <div
                   className="text-center justify-content-center d-flex flex-wrap"
                   id="forecastCard"
@@ -266,7 +275,7 @@ function App() {
                     }
                   })}
                 </div>
-              )}
+              )} */}
             </div>
           ) : null}
         </Col>
