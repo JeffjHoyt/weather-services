@@ -16,6 +16,11 @@ function DayCard(props) {
   return (
     <Container style={{ color: "white" }}>
       <Row>
+        <Col>
+          <h1 style={{ fontSize: "65px" }}>{props.city}</h1>
+        </Col>
+      </Row>
+      <Row>
         <Col style={{ color: "white" }}>
           <h1 style={{ fontWeight: "bold", fontSize: "150px" }}>
             {Math.floor(props.temp)}°

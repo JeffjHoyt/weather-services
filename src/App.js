@@ -216,6 +216,7 @@ function App() {
                 >
                   {weatherData && (
                     <DayCard
+                      city={weatherData.name}
                       weatherType={weatherData.weather[0].main}
                       temp={weatherData.main.temp}
                       weatherIcon={weatherData.weather[0].icon}
