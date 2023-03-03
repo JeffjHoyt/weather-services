@@ -7,18 +7,24 @@ const BottomBar = (props) => {
     <Container className="d-flex justify-content-center">
       <Row className="d-flex bottomBar align-content-center">
         <Col>
-          <div>{props.feelsLike}</div>
-          <div style={{ fontWeight: "bold" }}>Feels</div>
+          <div style={{ fontWeight: "bolder", fontSize: "26px" }}>
+            {Math.floor(props.feelsLike)}°
+          </div>
+          <div style={{ fontSize: "20px" }}>Feels</div>
         </Col>
         <Col>
           {" "}
-          <div>{props.high}</div>
-          <div>High</div>
+          <div style={{ fontWeight: "bolder", fontSize: "26px" }}>
+            {Math.floor(props.high)}°
+          </div>
+          <div style={{ fontSize: "20px" }}>High</div>
         </Col>
         <Col>
           {" "}
-          <div>{props.low}</div>
-          <div>Low</div>
+          <div style={{ fontWeight: "bolder", fontSize: "26px" }}>
+            {Math.floor(props.low)}°
+          </div>
+          <div style={{ fontSize: "20px" }}>Low</div>
         </Col>
       </Row>
     </Container>
